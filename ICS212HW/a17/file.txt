@@ -1,0 +1,2 @@
+the quick brown fox blah blah blah
+Writing a string on the last line of the file!

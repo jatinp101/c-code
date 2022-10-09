@@ -1,0 +1,11 @@
+a24_jatinp: a24_jatinp.o stack.o node.o
+	g++ a24_jatinp.o stack.o node.o -o a24_jatinp
+
+stack.o: stack.cpp stack.h
+	g++ -c stack.cpp
+
+node.o: node.cpp node.h
+	g++ -c node.cpp
+
+a24_jatinp.o: a24_jatinp.cpp stack.h node.h
+	g++ -c a24_jatinp.cpp

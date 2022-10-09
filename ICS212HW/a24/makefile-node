@@ -1,0 +1,8 @@
+node-driver: node-driver.o node.o
+	g++ node-driver.o node.o -o node-driver
+
+node-driver.o: node-driver.cpp node.h
+	g++ -c node-driver.cpp
+
+node.o: node.cpp node.h
+	g++ -c node.cpp

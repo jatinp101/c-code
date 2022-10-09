@@ -1,0 +1,126 @@
+/**
+ * Using inheritance with circles
+ * @author Jatin P
+ * @since 4/17/2019
+ */
+
+#include <iostream>
+using namespace std;
+
+// Base class circle
+// Cylinder surface area = 2*(circle's area) + h*(circle's circumference)
+//Cylinder volume = h*(circle's area)
+
+//Area of a circle = PI*radius* radius
+
+
+class Circle {
+
+public :
+  static const double PI = 3.1415926;
+  static const double ZERO = 0.0;
+
+  Circle (){ 
+    setRadius(ZERO);
+  }
+
+  Circle (double a) {
+    setRadius(a);
+  }
+  
+  void setRadius (double a) {
+    if (a < ZERO) 
+      a = -a;
+    r = a;
+  }
+  double getRadius () const{
+    return r;
+  }
+  double area () const{
+    double a = (r*r) * PI;
+    return a;
+  }
+
+protected :
+
+  double r;
+}; 
+
+class Cylinder: public Circle {
+public :
+  //overloaded "default" constructor
+  Cylinder(): Circle(ZERO){ 
+    setHeight(ZERO);
+  }
+
+  Cylinder (double tempR, double tempH): Circle(tempR) {
+    setHeight(tempH);
+  } 
+
+  void setHeight (double a) {
+    if (a < ZERO)
+      a = -a;
+    h = a;
+  }
+
+  double getHeight () const {
+    return h;
+  }
+
+  double area () const {
+    double a = Circle::area();
+    a = a * 2;
+    a = a + (2 * (PI * r * h));
+    return a;
+  }
+  
+  double volume () const {
+    double a = Circle::area();
+    a = h * a;
+    return a;
+  }
+
+  friend ostream &operator<<(ostream &output, const Cylinder & cylinder){
+    output<<"radius= " << cylinder.getRadius() << " height = " << cylinder.getHeight() << endl;
+    return output;
+  }   
+protected :
+
+  double h;
+  
+};
+
+int main (void) {
+
+  Circle cir1(10);
+  Circle cir2;
+  double temp;
+  cout << "Test Circle class constructor and area() function:" << endl;
+  temp = cir1.getRadius();
+  cout << "Circle cir1: radius=" << temp << endl;
+  temp = cir1.area();
+  cout << "area of cir1 = " << temp << endl;
+
+  cout << endl << "Test set and get methods for class Circle: " << endl;
+  cir2.setRadius(12);
+  temp = cir2.getRadius();
+  cout << "Circle cir2: radius=" << temp << endl;
+  cout << "get data members for cir2: " << temp << endl << endl;
+
+  Cylinder cyl1 (20, 30);
+  Cylinder cyl2;
+
+  cout << "Test Cylinder class constructor, area(), and volume() functions: " << endl;
+  cout << "Cylinder cyl1: " << cyl1;
+  temp = cyl1.area();
+  cout << "area of cyl1 = " << temp << endl;
+  temp = cyl1.volume();
+  cout << "volume of cyl1 = " << temp << endl;
+
+  cout << endl << "Test set and get methods for class Cylinder:" << endl;
+  cyl2.setRadius(40);
+  cyl2.setHeight(50);
+  cout << "Cylinder cyl2: " << cyl2;
+  cout << "get data members for cyl2: " << cyl2.getRadius() << ", " << cyl2.getHeight() << endl;
+  return 0;
+}

@@ -1,0 +1,9 @@
+a15_jatinp: a15_jatinp.o printbits.o
+	gcc a15_jatinp.o printbits.o -o a15_jatinp -lm
+
+a15_jatinp.o: a15_jatinp.c printbits.h
+	gcc -c a15_jatinp.c printbits.c
+
+printbits.o: printbits.c printbits.h
+	gcc -c printbits.c 
+

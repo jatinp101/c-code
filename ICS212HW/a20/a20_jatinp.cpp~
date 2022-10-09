@@ -1,0 +1,113 @@
+/**
+ * Complex class using Fraction2.cpp
+ * @author Jatin Pandya
+ * @since 4/4/2018
+ */
+
+#include <iostream>
+using namespace std;
+
+// complex number class definition
+class Complex {
+
+public:
+  // constant for 0
+  static const double ZERO = 0;
+
+  Complex() {
+    a = ZERO;
+    b = ZERO;
+  }
+  //Constructor initializes real and imaginary numbers
+  Complex(double real, double imag){       
+    //reusing the set function 
+    set(real, imag); 
+  }   
+  
+  //copy constructor - makes a copy of complex
+  Complex(const Complex &complex){         
+    set(complex.a, complex.b);      
+  }  
+  
+  //setting both a and b
+  void set (double one, double two) {
+    a = one;
+    b = two;
+  }
+  //Setting a
+  void setReal(double num){
+    a = num;
+  }
+  //Setting B
+  void setImaginary(double imag){
+    //re-use code!
+    set(a, imag);
+  }
+  // returning real and imaginary numbers
+  double getReal() const{
+    return a;
+  } 
+  double getImaginary() const{
+    return b;
+  }
+  //more member functions
+  Complex add(const Complex &complex){
+    double real3 = a + complex.a;
+    double imag3 = b + complex.b;
+    Complex complex3(real3, imag3);
+    return complex3;
+  }
+  
+  Complex subtract(const Complex &complex){
+    double real3 = a - complex.a;
+    double imag3 = b - complex.b;
+    Complex complex3(real3, imag3);
+    return complex3;
+  }
+
+  //(a + bi) * (c + di) = (a*c - b*d) + (b*c + a*d)i
+  Complex multiply(const Complex &complex){
+    double real3 = (a * complex.a)  - (b * complex.b);
+    double imag3 = (b * complex.a) + (a * complex.b);
+    Complex complex3(real3, imag3);
+    return complex3;
+  }
+
+  //(a*c + b*d)/(c*c + d*d) + (b*c - a*d)/(c*c + d*d)i
+  Complex divide(const Complex &complex){
+    double temp = ((complex.a * complex.a) + (complex.b * complex.b));
+    double real3 = ((a * complex.a) + (b * complex.b)) / temp;
+    double imag3 = ((b * complex.a) - (a * complex.b)) / temp;
+    Complex complex3(real3, imag3);
+    return complex3;
+  }
+
+  // printing complex numbers
+  void print() const{      
+    cout << a << " + " << b << "i" << endl;
+  }
+  ~Complex() {       
+    cout<<"Destructor ("<<a<<" + "<< b <<"i" << ")"<<endl;      
+  } 
+private:
+  double a;
+  double b;
+};
+
+int main (void) {
+  // variables
+  Complex c1(1.1, 2.3);
+  Complex c2(c1);
+  Complex c3;
+
+  // constructor tester
+  cout << "Testing Constructors" << endl;
+  cout << "Complex number c1 using two parameter construction is : ";
+  c1.print();
+  cout << "Complex number c2 using copy constructor is : ";
+  c2.print();
+
+  cout << "Testing add() function" << endl;
+  c3 = c1.add(c2);
+  return 0;
+}

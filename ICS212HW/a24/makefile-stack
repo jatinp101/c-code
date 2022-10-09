@@ -1,0 +1,11 @@
+stack-driver: stack-driver.o stack.o node.o
+	g++ stack-driver.o stack.o node.o -o stack-driver
+
+stack-driver.o: stack-driver.cpp stack.h
+	g++ -c stack-driver.cpp
+
+stack.o: stack.cpp node.cpp stack.h node.h
+	g++ -c stack.cpp node.cpp
+
+node.o: node.cpp node.h
+	g++ -c node.cpp

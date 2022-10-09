@@ -1,0 +1,9 @@
+a3_jatinp: a3_jatinp.o getdouble.o
+	gcc a3_jatinp.o getdouble.o -o a3_jatinp 
+
+a3_jatinp.o: a3_jatinp.c
+	gcc -c a3_jatinp.c 
+
+getdouble.o: getdouble.c
+	gcc -c getdouble.c 
+
